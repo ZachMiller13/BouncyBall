@@ -1,5 +1,5 @@
 import Foundation
-
+let circle = OvalShape(width: 150, height: 150)
 /*
 The setup() function is called once when the app launches. Without it, your app won't compile.
 Use it to set up and start your app.
@@ -11,5 +11,6 @@ of a function.
 */
 
 func setup() {
-    
+    circle.position = Point(x: 250, y: 400)
+    scene.add(circle)
 }
