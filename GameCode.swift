@@ -55,6 +55,7 @@ fileprivate func setupBall() {
     scene.trackShape(ball)
     ball.onExitedScene = ballExitedScene
     ball.onTapped = resetGame
+    ball.bounciness = 0.6
 }
 
 fileprivate func setupBarrier() {
@@ -64,6 +65,7 @@ fileprivate func setupBarrier() {
     scene.add(barrier)
     barrier.isImmobile = true
     barrier.fillColor = .green
+    barrier.angle = 0.1
 }
 
 fileprivate func setupFunnel() {
@@ -82,6 +84,7 @@ func setup() {
     setupFunnel()
     setupTarget()
     resetGame()
+    scene.onShapeMoved = printPosition(of:)
 }
 
 //Drops the ball by moving it to the funnels position
@@ -93,7 +96,7 @@ func dropBall() {
 
 //Setup a target function to add to scene
 func setupTarget() {
-    target.position = Point(x: 200, y: 400)
+    target.position = Point(x: 110, y: 502)
     target.hasPhysics = true
     target.isImmobile = true
     target.isImpermeable = true
@@ -101,6 +104,7 @@ func setupTarget() {
     scene.add(target)
     target.name = "target"
     target.isDraggable = false
+    
 }
 
 //Handles collisions between the ball and targets
@@ -117,4 +121,8 @@ func ballExitedScene() {
 //resets the game by moving the ball below the scene, which will unlock the barriers.
 func resetGame() {
     ball.position = Point(x: 0, y: -80)
+}
+
+func printPosition(of shape: Shape) {
+    print(shape.position)
 }
