@@ -87,6 +87,9 @@ func setup() {
 //Drops the ball by moving it to the funnels position
 func dropBall() {
     ball.position = funnel.position
+    for target in targets {
+        target.fillColor = .yellow
+    }
     ball.stopAllMotion()
     for barrier in barriers {
         barrier.isDraggable = false
@@ -125,6 +128,18 @@ func ballExitedScene() {
     for barrier in barriers {
         barrier.isDraggable = true
     }
+    var hitTargets = 0
+    for target in targets {
+        if target.fillColor == .orange {
+            hitTargets += 1
+        }
+    }
+    if hitTargets == targets.count {
+        scene.presentAlert(text: "You won!", completion: alertDismissed)
+    } 
+}
+func alertDismissed() {
+    
 }
 
 //resets the game by moving the ball below the scene, which will unlock the barriers.
